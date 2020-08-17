@@ -26,8 +26,11 @@ function submitIssue(e) {
 const setStatusClosed = id => {
   const issues = JSON.parse(localStorage.getItem('issues'));
   const currentIssue = issues.find(issue => issue.id == id);
+  if (currentIssue.status !== 'Closed') {
+    const solved = parseInt(document.getElementById('solved').innerText);
+    document.getElementById('solved').innerText = solved+1;
+  }
   currentIssue.status = 'Closed';
-  
   localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
 }
@@ -37,6 +40,10 @@ const deleteIssue = id => {
   let currentIssue = issues.find(issue => issue.id == id);
   const remainingIssues = issues.filter(issue => issue !== currentIssue);
   document.getElementById('total').innerText = remainingIssues.length;
+  if (currentIssue.status == 'Closed') {
+    const solved = parseInt(document.getElementById('solved').innerText);
+    document.getElementById('solved').innerText = solved-1;
+  }
   localStorage.setItem('issues', JSON.stringify(remainingIssues));
   fetchIssues();
 }
