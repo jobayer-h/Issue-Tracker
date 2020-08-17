@@ -31,6 +31,11 @@ const setStatusClosed = id => {
     document.getElementById('solved').innerText = solved+1;
   }
   currentIssue.status = 'Closed';
+// line throw
+  const closedIssue = document.getElementById(`${currentIssue.id}`);
+  closedIssue.style.textDecoration = 'line-through' ;
+  console.log(closedIssue);
+// line throw
   localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
 }
@@ -59,7 +64,7 @@ const fetchIssues = () => {
     issuesList.innerHTML +=   `<div class="well">
                               <h6>Issue ID: ${id} </h6>
                               <p><span class="label label-info"> ${status} </span></p>
-                              <h3 id="title"> ${description} </h3>
+                              <h3 id="${id}"> ${description} </h3>
                               <p><span class="glyphicon glyphicon-time"></span> ${severity}</p>
                               <p><span class="glyphicon glyphicon-user"></span> ${assignedTo}</p>
                               <a href="#" onclick="setStatusClosed(${id})" class="btn btn-warning">Close</a>
