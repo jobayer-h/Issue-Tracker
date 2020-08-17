@@ -31,13 +31,11 @@ const setStatusClosed = id => {
     document.getElementById('solved').innerText = solved+1;
   }
   currentIssue.status = 'Closed';
-// line throw
-  const closedIssue = document.getElementById(`${currentIssue.id}`);
-  closedIssue.style.textDecoration = 'line-through' ;
-  console.log(closedIssue);
-// line throw
+  // console.log(closedIssue);
   localStorage.setItem('issues', JSON.stringify(issues));
   fetchIssues();
+  const closedIssue = document.getElementById(`${currentIssue.id}`);
+  closedIssue.style.textDecoration = 'line-through' ;
 }
 
 const deleteIssue = id => {
